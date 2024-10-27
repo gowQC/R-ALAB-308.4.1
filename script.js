@@ -111,3 +111,15 @@ console.log(obj_array);
 /**
  */
 console.log("==========FIFTH PART==========");
+// first append key names
+let new_csv = Object.keys(obj_array[0]).join() + "\n"; // doesn't matter which index we target; they all have the same formatting
+
+// then append values
+for (n = 0; n<total_columns; n++) {
+    // get nth object and display all values for concatenation
+    new_csv += Object.values(obj_array[n]).join() + "\n";
+}
+
+// slice off the last \n
+new_csv = new_csv.slice(0,-1);
+console.log(JSON.stringify(new_csv));
