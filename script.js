@@ -3,6 +3,7 @@
  * first line of csv should = the keys to an object
  * second line+ of csv should be the data mapping to appropriate keys
  */
+console.log("==========FIRST PART==========");
 const data = {} // should be empty at first, then add keys of first line as we read through the csv
 
 let csv_string = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
@@ -28,7 +29,7 @@ for (let i = 0; i < csv_string.length; i++) {
         }
     }
     // once keys are proven initialized, we use this else if to populate the respective arrays
-    else if ((csv_string[i] === ',' || csv_string[i] === '\n' && pastFirstLine === true) || ((i+1) == csv_string.length && pastFirstLine === true)) { // checks for commas or \n BUT ALSO checks for end of a CSV string as well
+    else if ((csv_string[i] === ',' || csv_string[i] === '\n' && pastFirstLine === true) || (i == csv_string.length && pastFirstLine === true)) { // checks for commas or \n BUT ALSO checks for end of a CSV string as well
         let keyName = Object.keys(data)[col_counter]; // access proper key name
         data[keyName].push(new_string); // push data into proper key
         new_string = "";
@@ -55,10 +56,10 @@ for (let i = 0; i < csv_string.length; i++) {
  *  task is asking for [  [] [] []  ], 
  *  so arrays within one single 2d array
  */
-
+console.log("==========SECOND PART==========");
 let total_columns = Object.keys(data).length;
-let two_d_array = [];
-let temp_array = [];
+const two_d_array = [];
+let temp_array = []; // cannot be const because it will be re-assigned as an empty array
 
 // dynamically populate 2d array
 for (i = 0; i < row_counter+1; i++) { // + 1 to account for keys of object as a row
@@ -80,6 +81,24 @@ console.log(two_d_array);
 
 //PART 3
 /**
- *  task is asking for [  [] [] []  ], 
- *  so arrays within one single 2d array
  */
+console.log("==========THIRD PART==========");
+const single_array = two_d_array[0]; // will contain key names from 2d array
+const obj_array = [];
+let myObj = {}; // cannot be const because it will be re-assigned
+
+for (i=1; i<two_d_array.length; i++) { // from 1 to 10 in our example
+    for(k=0; k<single_array.length; k++) { // from 0 to 3 in our example
+        myObj[`${single_array[k]}`] = two_d_array[i][k];
+        if (k==single_array.length-1) {
+            obj_array.push(myObj);
+            myObj = {};
+        }
+    }
+}
+console.log(obj_array);
+
+//PART 4
+/**
+ */
+console.log("==========FOURTH PART==========");
