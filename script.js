@@ -3,9 +3,7 @@
  * first line of csv should = the keys to an object
  * second line+ of csv should be the data mapping to appropriate keys
  */
-const data = { // should be empty at first, then add keys of first line as we read through the csv
-    
-}
+const data = {} // should be empty at first, then add keys of first line as we read through the csv
 
 let csv_string = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
 let new_string = "";
@@ -30,7 +28,7 @@ for (let i = 0; i < csv_string.length; i++) {
         }
     }
     // once keys are proven initialized, we use this else if to populate the respective arrays
-    else if (csv_string[i] === ',' || csv_string[i] === '\n' && pastFirstLine === true) {
+    else if ((csv_string[i] === ',' || csv_string[i] === '\n' && pastFirstLine === true) || ((i+1) == csv_string.length && pastFirstLine === true)) { // checks for commas or \n BUT ALSO checks for end of a CSV string as well
         let keyName = Object.keys(data)[col_counter]; // access proper key name
         data[keyName].push(new_string); // push data into proper key
         new_string = "";
@@ -52,4 +50,36 @@ for (let i = 0; i < csv_string.length; i++) {
     }
 }
 
-//can complete pt2 without specifying num of columns
+//PART 2
+/**
+ *  task is asking for [  [] [] []  ], 
+ *  so arrays within one single 2d array
+ */
+
+let total_columns = Object.keys(data).length;
+let two_d_array = [];
+let temp_array = [];
+
+// dynamically populate 2d array
+for (i = 0; i < row_counter+1; i++) { // + 1 to account for keys of object as a row
+    for (k = 0; k < Object.keys(data).length; k++) {
+        if (i == 0) {
+            temp_array.push(Object.keys(data)[k]); // pushes name of key to temp array
+        }
+        else {
+            let keyName = Object.keys(data)[k];
+            temp_array.push(data[keyName][i-1]); // pushes values of key to temp array >> we have -1 to not leave out the very first row of data
+        }
+        if (k+1 == Object.keys(data).length) {
+            two_d_array.push(temp_array); // pushes populated array
+            temp_array = []; // resets populated array
+        }
+    }
+}
+console.log(two_d_array);
+
+//PART 3
+/**
+ *  task is asking for [  [] [] []  ], 
+ *  so arrays within one single 2d array
+ */
