@@ -6,14 +6,14 @@
 console.log("==========FIRST PART==========");
 const data = {} // should be empty at first, then add keys of first line as we read through the csv
 
-let csv_string = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
+let csv_string = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor's Assistant,26";
 let new_string = "";
 pastFirstLine = false; // will be used to check if first line was already parsed for object keys
 col_counter = 0; // counts the columns of object/how many properties the object will have >> will eventually reset to 0
 row_counter = 0; // counts rows/stores appropriate index of all arrays as they're filled out >> should never reset value
 
 
-for (let i = 0; i < csv_string.length; i++) {
+for (let i = 0; i <= csv_string.length; i++) {
     // first we will initialize the keys of object properties as empty arrays
     if ((csv_string[i] === ',' || csv_string[i] === '\n') && pastFirstLine === false) { // fill keys/header
         data[`${new_string}`] = []; // adds name of a new key and assigns it an empty array
@@ -102,3 +102,12 @@ console.log(obj_array);
 /**
  */
 console.log("==========FOURTH PART==========");
+obj_array.pop(); // removes last element from object array
+obj_array.splice(1, 0, { ID: "48", Name: "Barry", Occupation: "Runner", Age: "25" });
+obj_array.push({ ID: "7", Name: "Bilbo", Occupation: "None", Age: "111" });
+console.log(obj_array);
+
+//PART 5
+/**
+ */
+console.log("==========FIFTH PART==========");
