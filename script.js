@@ -107,6 +107,15 @@ obj_array.splice(1, 0, { ID: "48", Name: "Barry", Occupation: "Runner", Age: "25
 obj_array.push({ ID: "7", Name: "Bilbo", Occupation: "None", Age: "111" });
 console.log(obj_array);
 
+// printing average age of objects in array
+let ageTotal = 0;
+
+for (i=0;i<obj_array.length;i++) {
+    ageTotal += parseInt(obj_array[i].Age); // .Age is string, so parseInt converts it to a number, then it gets added to total
+}
+
+console.log("Average age: " + ageTotal/obj_array.length);
+
 //PART 5
 /**
  */
